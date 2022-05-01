@@ -7,6 +7,7 @@ import (
 
 func Router() *gin.Engine {
 	app := gin.Default()
+	app.Use(services.Cors())
 	api := app.Group("/api")
 	{
 		api.POST("/upload", services.Upload)
