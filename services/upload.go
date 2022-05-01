@@ -18,10 +18,10 @@ func Upload(c *gin.Context) {
 		fmt.Println("err", err.Error())
 		return
 	}
-	dst := filepath.Join(path, cast.ToString(time.Now().Unix()) + "-" + file.Filename)
+	dst := filepath.Join(path, cast.ToString(time.Now().Unix())+"-"+file.Filename)
 	_ = c.SaveUploadedFile(file, dst)
 
-	url := filepath.Join(os.Getenv("APP_URL"), dst)
+	url := os.Getenv("APP_URL") + dst
 	c.JSON(200, map[string]interface{}{
 		"message": "success",
 		"code":    http.StatusCreated,
