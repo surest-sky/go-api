@@ -18,7 +18,8 @@ func Upload(c *gin.Context) {
 		fmt.Println("err", err.Error())
 		return
 	}
-	dst := filepath.Join(path, cast.ToString(time.Now().Unix())+"-"+file.Filename)
+	filename := c.DefaultPostForm("name", file.Filename)
+	dst := filepath.Join(path, cast.ToString(time.Now().Unix())+"-"+filename)
 	_ = c.SaveUploadedFile(file, dst)
 
 	url := os.Getenv("APP_URL") + dst
